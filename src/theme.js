@@ -1,0 +1,13 @@
+const THEME = {
+  MAIN_COLOR: '#AF2150',
+  BG_ITEM: '#FF83A3',
+  DARK: '#620018',
+  BG_COLOR: '#F7F5DD',
+  BG_HIDE: '#BC808B',
+  SPACING: 10,
+  FONT_SIZE: 18,
+  ITEM_HEIGHT: 80,
+  HEADER_SIZE: 60,
+};
+
+export default THEME;
