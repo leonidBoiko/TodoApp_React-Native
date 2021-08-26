@@ -9,24 +9,26 @@ import THEME from '../../theme';
 import CreateTodoHeader from '../CreateTodoHeader';
 import styles from './styles';
 
-const CreateTask = () => {
+const CreateTask = ({selectCategory, setSelectCategory}) => {
   const {addTodo} = React.useContext(TodoContext);
   const navigation = useNavigation();
   const [title, setTitle] = React.useState('');
   const [value, setValue] = React.useState('');
+
   const handleAddTask = React.useCallback(() => {
     if (value.trim().length || title.trim().length) {
-      addTodo(value);
+      addTodo(title, value, selectCategory);
       setValue('');
+      setSelectCategory(1);
       navigation.navigate('Home');
     } else {
       Alert.alert('One field must not be empty!');
     }
-  }, [value, title, navigation, addTodo]);
+  }, [value, title, navigation, addTodo, selectCategory, setSelectCategory]);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      header: () => <CreateTodoHeader handleAddTask={handleAddTask} />,
+      header: () => <CreateTodoHeader {...{handleAddTask}} />,
     });
   }, [navigation, handleAddTask]);
 

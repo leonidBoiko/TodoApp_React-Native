@@ -5,7 +5,14 @@ import styles from './styles';
 const ItemList = ({item}) => {
   return (
     <View style={styles.itemContainer}>
-      <Text style={styles.itemText}>{item.text}</Text>
+      {item.title && (
+        <Text numberOfLines={1} style={[styles.itemText, styles.itemTitle]}>
+          {item.title}
+        </Text>
+      )}
+      <Text style={styles.itemText} numberOfLines={2}>
+        {item.text}
+      </Text>
     </View>
   );
 };

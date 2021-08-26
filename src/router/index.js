@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TaskList from '../components/TaskList';
@@ -10,6 +10,8 @@ import THEME from '../theme';
 const Stack = createNativeStackNavigator();
 
 export default function Router() {
+  const [selectCategory, setSelectCategory] = useState(1);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -18,10 +20,13 @@ export default function Router() {
           component={TaskList}
           options={{header: () => <HomeHeader />}}
         />
-        <Stack.Screen name="CreateTodo" component={CreateTask} />
+        <Stack.Screen name="CreateTodo">
+          {props => (
+            <CreateTask {...props} {...{selectCategory, setSelectCategory}} />
+          )}
+        </Stack.Screen>
         <Stack.Screen
           name="Category"
-          component={CategoryList}
           options={{
             title: 'Change category',
             headerTintColor: 'white',
@@ -29,8 +34,11 @@ export default function Router() {
               backgroundColor: THEME.DARK,
             },
             headerTitleStyle: {color: 'white'},
-          }}
-        />
+          }}>
+          {props => (
+            <CategoryList {...props} {...{selectCategory, setSelectCategory}} />
+          )}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

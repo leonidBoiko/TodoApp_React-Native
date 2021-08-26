@@ -4,13 +4,13 @@ import {useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 
-const CreateTodoHeader = ({handleAddTask}) => {
+const CreateTodoHeader = ({handleAddTask, setSelectCategory}) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.iconWrap}
-        onPress={() => navigation.navigate('Category')}>
+        onPress={() => navigation.navigate('Category', {setSelectCategory})}>
         <Ionicons name="list-sharp" color="white" size={25} />
         <Text style={styles.iconText}>Category</Text>
       </TouchableOpacity>

@@ -21,5 +21,9 @@ const styles = StyleSheet.create({
     fontSize: THEME.FONT_SIZE,
     color: '#32222B',
   },
+  itemTitle: {
+    fontSize: THEME.FONT_SIZE + 2,
+    fontWeight: '700',
+  },
 });
 export default styles;

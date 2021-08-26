@@ -8,9 +8,8 @@ import CategoryModal from './CategoryModal';
 import CategoryHideItemList from './CategoryHideItemList';
 import styles from './styles';
 
-const CategoryList = () => {
+const CategoryList = props => {
   const {categories} = useContext(CategoryContext);
-  const [selected, setSelected] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const handlerVisibleModal = () => setShowModal(!showModal);
 
@@ -22,10 +21,10 @@ const CategoryList = () => {
         leftOpenValue={50}
         rightOpenValue={0}
         keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <CategoryListItem {...{item, selected, setSelected}} />
+        renderItem={({item}) => <CategoryListItem {...props} item={item} />}
+        renderHiddenItem={({item}, _) => (
+          <CategoryHideItemList {...props} item={item} />
         )}
-        renderHiddenItem={({item}, _) => <CategoryHideItemList item={item} />}
       />
       <TouchableOpacity style={styles.btn} onPress={handlerVisibleModal}>
         <AntDesign name="pluscircleo" size={30} color="green" />

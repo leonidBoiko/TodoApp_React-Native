@@ -6,7 +6,7 @@ const THEME = {
   BG_HIDE: '#BC808B',
   SPACING: 10,
   FONT_SIZE: 18,
-  ITEM_HEIGHT: 80,
+  ITEM_HEIGHT: 90,
   HEADER_SIZE: 60,
 };
 

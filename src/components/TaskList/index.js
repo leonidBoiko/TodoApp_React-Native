@@ -10,7 +10,7 @@ const TaskList = () => {
   const {todos} = React.useContext(TodoContext);
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <SwipeListView
         data={todos}
         keyExtractor={item => item.id}
