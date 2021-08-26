@@ -3,6 +3,7 @@ const styles = StyleSheet.create({
   listItem: {
     borderTopWidth: 1,
     padding: 20,
+    backgroundColor: 'white',
   },
   listItemText: {
     fontSize: 20,
@@ -29,6 +30,12 @@ const styles = StyleSheet.create({
   },
   modalBtn: {
     width: 100,
+  },
+  hideItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 50,
+    height: '100%',
   },
 });
 

@@ -1,15 +1,45 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import Modal from 'react-native-modal';
+import {CategoryContext} from '../../context/category/categoryContext';
 import THEME from '../../theme';
 import styles from './styles';
 
 const CategoryModal = ({showModal, handlerVisibleModal}) => {
+  const {categories, addCategory} = useContext(CategoryContext);
+  const [value, setValue] = useState('');
+  const [inputError, setInputError] = useState('');
+
+  useEffect(() => {
+    setValue('Category 1');
+    setInputError('');
+  }, [showModal]);
+
+  const handlerSave = () => {
+    if (!value.trim().length) {
+      setInputError('The field must not be empty');
+    } else if (categories.some(item => item.title === value)) {
+      setInputError('This category is already in use');
+    } else {
+      addCategory(value);
+      handlerVisibleModal();
+    }
+  };
+
   return (
     <Modal isVisible={showModal} animationIn="fadeIn" animationOut="fadeOut">
       <View style={styles.modalBlock}>
-        <Input placeholder="" defaultValue="Category 1" selectTextOnFocus />
+        <Input
+          value={value}
+          onChangeText={text => {
+            setValue(text);
+            inputError.length && setInputError('');
+          }}
+          errorStyle={{fontSize: 14, fontWeight: '600'}}
+          selectTextOnFocus
+          errorMessage={inputError}
+        />
         <View style={styles.modalButtons}>
           <View style={styles.modalBtn}>
             <Button
@@ -24,7 +54,7 @@ const CategoryModal = ({showModal, handlerVisibleModal}) => {
             <Button
               buttonStyle={{backgroundColor: THEME.DARK}}
               title="Save"
-              onPress={handlerVisibleModal}
+              onPress={handlerSave}
             />
           </View>
         </View>
