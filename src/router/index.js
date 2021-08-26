@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TaskList from '../components/TaskList';
-import HomeHeader from '../components/HomeHeader';
 import CreateTask from '../components/CreateTask';
 import CategoryList from '../components/CategoryList';
 import THEME from '../theme';
@@ -15,11 +14,7 @@ export default function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={TaskList}
-          options={{header: () => <HomeHeader />}}
-        />
+        <Stack.Screen name="Home" component={TaskList} />
         <Stack.Screen name="CreateTodo">
           {props => (
             <CreateTask {...props} {...{selectCategory, setSelectCategory}} />

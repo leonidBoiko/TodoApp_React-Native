@@ -12,12 +12,13 @@ const CategoryList = props => {
   const {categories} = useContext(CategoryContext);
   const [showModal, setShowModal] = useState(false);
   const handlerVisibleModal = () => setShowModal(!showModal);
+  const filterCat = categories.filter(item => item.id !== 2);
 
   return (
     <View>
       <CategoryModal {...{handlerVisibleModal, showModal}} />
       <SwipeListView
-        data={categories}
+        data={filterCat}
         leftOpenValue={50}
         rightOpenValue={0}
         keyExtractor={item => item.id}

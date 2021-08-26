@@ -5,7 +5,10 @@ import {categoryReducer} from './categoryReducer';
 
 export const CategoryState = ({children}) => {
   const initState = {
-    categories: [{id: 1, title: 'No category'}],
+    categories: [
+      {id: 1, title: 'No category'},
+      {id: 2, title: 'All todo list'},
+    ],
   };
   const [state, dispatch] = React.useReducer(categoryReducer, initState);
   const addCategory = title => dispatch({type: ADD_CATEGORY, title});

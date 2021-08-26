@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, TouchableOpacity, Animated} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+import {CategoryContext} from '../../context/category/categoryContext';
 import styles from './styles';
 import HomeSearch from '../HomeSearch';
 
-const HomeHeader = () => {
+const HomeHeader = props => {
+  const {selectedCategory, setSelectedCategory} = props;
+  const {categories} = useContext(CategoryContext);
   const opacity = React.useRef(new Animated.Value(0)).current;
   const translateY = React.useRef(new Animated.Value(-60)).current;
   const [showSearch, setShowSearch] = React.useState(true);
@@ -26,18 +29,20 @@ const HomeHeader = () => {
   return (
     <View style={styles.container}>
       <Picker
+        selectedValue={selectedCategory}
+        onValueChange={itemValue => setSelectedCategory(itemValue)}
         style={styles.picker}
         mode="dialog"
         dropdownIconRippleColor="purple"
         dropdownIconColor="red">
-        <Picker.Item label="All categories" value="all" />
-        <Picker.Item label="Java Script" value="js" />
-        <Picker.Item label="Python" value="p" />
+        {categories.map(item => (
+          <Picker.Item key={item.id} label={item.title} value={item.id} />
+        ))}
       </Picker>
       <TouchableOpacity onPress={animate} style={styles.textWrap}>
         <Text style={styles.text}>Search</Text>
       </TouchableOpacity>
-      <HomeSearch {...{animate, opacity, translateY}} />
+      <HomeSearch {...{animate, opacity, translateY}} {...props} />
     </View>
   );
 };
