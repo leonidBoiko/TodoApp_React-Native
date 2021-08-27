@@ -9,7 +9,7 @@ import THEME from '../theme';
 const Stack = createNativeStackNavigator();
 
 export default function Router() {
-  const [selectCategory, setSelectCategory] = useState(1);
+  const [selectCategory, setSelectCategory] = useState(2);
 
   return (
     <NavigationContainer>

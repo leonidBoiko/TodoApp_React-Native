@@ -6,15 +6,15 @@ import THEME from '../../theme';
 import styles from './styles';
 
 export default function CategoryHideItemList({item, setSelectCategory}) {
-  const {removeCategory} = useContext(CategoryContext);
+  const {fetchRemoveCategory} = useContext(CategoryContext);
   const handleDelete = () => {
-    removeCategory(item.id);
-    setSelectCategory(1);
+    fetchRemoveCategory(item.id);
+    setSelectCategory(2);
   };
 
   return (
     <TouchableOpacity style={styles.hideItem} onPress={handleDelete}>
-      {item.id !== 1 && <Ionicons name="trash" size={30} color={THEME.DARK} />}
+      {item.id !== 2 && <Ionicons name="trash" size={30} color={THEME.DARK} />}
     </TouchableOpacity>
   );
 }

@@ -7,7 +7,7 @@ import THEME from '../../theme';
 import styles from './styles';
 
 const CategoryModal = ({showModal, handlerVisibleModal}) => {
-  const {categories, addCategory} = useContext(CategoryContext);
+  const {categories, fetchCreateCategory} = useContext(CategoryContext);
   const [value, setValue] = useState('');
   const [inputError, setInputError] = useState('');
 
@@ -22,7 +22,7 @@ const CategoryModal = ({showModal, handlerVisibleModal}) => {
     } else if (categories.some(item => item.title === value)) {
       setInputError('This category is already in use');
     } else {
-      addCategory(value);
+      fetchCreateCategory(value.trim());
       handlerVisibleModal();
     }
   };

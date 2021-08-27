@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect, useState, useEffect} from 'react';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {TodoContext} from '../../context/todo/todoContext';
 import ItemList from './ItemList';
@@ -6,11 +6,13 @@ import ItemHidden from './ItemHidden';
 import {View} from 'react-native';
 import AddTodoBtn from '../../ui/AddTodoBtn';
 import HomeHeader from '../HomeHeader';
+import {CategoryContext} from '../../context/category/categoryContext';
 
 const TaskList = ({navigation}) => {
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(2);
+  const [selectedCategory, setSelectedCategory] = useState(1);
   const {todos} = React.useContext(TodoContext);
+  const {fetchCategoryList} = React.useContext(CategoryContext);
   const searchData = todos.filter(item => {
     return (
       item.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -20,10 +22,12 @@ const TaskList = ({navigation}) => {
   const filterData = searchData.filter(item => {
     if (item.category === selectedCategory) {
       return item;
-    } else if (selectedCategory === 2) {
+    } else if (selectedCategory === 1) {
       return item;
     }
   });
+
+  useEffect(() => fetchCategoryList(), [fetchCategoryList]);
 
   useLayoutEffect(() => {
     navigation.setOptions({

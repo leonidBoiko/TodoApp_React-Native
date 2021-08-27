@@ -14,7 +14,7 @@ const ItemHidden = ({item}) => {
         <Entypo name="trash" size={30} color={THEME.DARK} />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Entypo name="edit" size={30} color={THEME.DARK} />
+        <Entypo name="eye" size={30} color={THEME.DARK} />
       </TouchableOpacity>
     </View>
   );

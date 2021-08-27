@@ -4,13 +4,7 @@ import {TodoContext} from './todoContext';
 import {todoReducer} from './todoReducer';
 
 export const TodoState = ({children}) => {
-  const initState = {
-    todos: [
-      {id: 1, title: 'Title 2', text: 'Some text', category: 1},
-      {id: 2, title: 'Title 1', text: 'Some text 1', category: 1},
-    ],
-  };
-  const [state, dispatch] = React.useReducer(todoReducer, initState);
+  const [state, dispatch] = React.useReducer(todoReducer, {todos: []});
   const addTodo = (title, text, category) => {
     dispatch({type: ADD_TODO, text, title, category});
   };
