@@ -11,7 +11,7 @@ import {CategoryContext} from '../../context/category/categoryContext';
 const TaskList = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(1);
-  const {todos} = React.useContext(TodoContext);
+  const {todos, fetchTodoList} = React.useContext(TodoContext);
   const {fetchCategoryList} = React.useContext(CategoryContext);
   const searchData = todos.filter(item => {
     return (
@@ -28,6 +28,7 @@ const TaskList = ({navigation}) => {
   });
 
   useEffect(() => fetchCategoryList(), [fetchCategoryList]);
+  useEffect(() => fetchTodoList(), [fetchTodoList]);
 
   useLayoutEffect(() => {
     navigation.setOptions({

@@ -1,5 +1,6 @@
 const THEME = {
   MAIN_COLOR: '#AF2150',
+  TODO_ITEM_BG: '#FFE3EB',
   BG_ITEM: '#FF83A3',
   DARK: '#620018',
   BG_COLOR: '#F7F5DD',

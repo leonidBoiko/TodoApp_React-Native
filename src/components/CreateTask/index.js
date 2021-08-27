@@ -10,21 +10,28 @@ import CreateTodoHeader from '../CreateTodoHeader';
 import styles from './styles';
 
 const CreateTask = ({selectCategory, setSelectCategory}) => {
-  const {addTodo} = React.useContext(TodoContext);
+  const {fetchCreateTodo} = React.useContext(TodoContext);
   const navigation = useNavigation();
   const [title, setTitle] = React.useState('');
-  const [value, setValue] = React.useState('');
+  const [text, setText] = React.useState('');
 
   const handleAddTask = React.useCallback(() => {
-    if (value.trim().length || title.trim().length) {
-      addTodo(title, value, selectCategory);
-      setValue('');
-      setSelectCategory(1);
+    if (text.trim().length || title.trim().length) {
+      fetchCreateTodo({title, text, category: selectCategory});
+      setText('');
+      setSelectCategory(2);
       navigation.navigate('Home');
     } else {
       Alert.alert('One field must not be empty!');
     }
-  }, [value, title, navigation, addTodo, selectCategory, setSelectCategory]);
+  }, [
+    text,
+    title,
+    navigation,
+    fetchCreateTodo,
+    selectCategory,
+    setSelectCategory,
+  ]);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -44,8 +51,8 @@ const CreateTask = ({selectCategory, setSelectCategory}) => {
         }
       />
       <Input
-        value={value}
-        onChangeText={setValue}
+        value={text}
+        onChangeText={setText}
         placeholder="Add task"
         multiline
         autoFocus

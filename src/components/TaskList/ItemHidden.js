@@ -6,11 +6,11 @@ import THEME from '../../theme';
 import styles from './styles';
 
 const ItemHidden = ({item}) => {
-  const {removeTodo} = React.useContext(TodoContext);
+  const {fetchRemoveTodo} = React.useContext(TodoContext);
 
   return (
     <View style={styles.hiddenContainer}>
-      <TouchableOpacity onPress={() => removeTodo(item.id)}>
+      <TouchableOpacity onPress={() => fetchRemoveTodo(item.id)}>
         <Entypo name="trash" size={30} color={THEME.DARK} />
       </TouchableOpacity>
       <TouchableOpacity>

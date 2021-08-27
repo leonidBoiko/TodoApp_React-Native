@@ -4,7 +4,7 @@ import THEME from '../../theme';
 const styles = StyleSheet.create({
   itemContainer: {
     height: THEME.ITEM_HEIGHT,
-    backgroundColor: THEME.BG_ITEM,
+    backgroundColor: THEME.TODO_ITEM_BG,
     elevation: 10,
     marginBottom: THEME.SPACING,
     padding: THEME.SPACING,

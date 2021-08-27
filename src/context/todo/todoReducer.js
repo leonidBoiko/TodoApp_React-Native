@@ -1,15 +1,17 @@
-import {ADD_TODO, REMOVE_TODO, UPDATE_TODO} from '../types';
+import {ADD_TODO, REMOVE_TODO, UPDATE_TODO, GET_TODO_LIST} from '../types';
 
 export const todoReducer = (state, action) => {
   switch (action.type) {
-    case ADD_TODO:
-      const {title, text, category} = action;
+    case GET_TODO_LIST:
       return {
         ...state,
-        todos: [
-          {id: Date.now().toString(), title, text, category},
-          ...state.todos,
-        ],
+        todos: action.data,
+      };
+    case ADD_TODO:
+      const {id, title, text, category} = action;
+      return {
+        ...state,
+        todos: [{id, title, text, category}, ...state.todos],
       };
     case UPDATE_TODO:
       return {
