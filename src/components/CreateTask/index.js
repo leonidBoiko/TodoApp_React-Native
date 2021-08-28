@@ -9,15 +9,23 @@ import THEME from '../../theme';
 import CreateTodoHeader from '../CreateTodoHeader';
 import styles from './styles';
 
-const CreateTask = ({selectCategory, setSelectCategory}) => {
-  const {fetchCreateTodo} = React.useContext(TodoContext);
+const CreateTask = ({selectCategory, setSelectCategory, route}) => {
+  const {params} = route;
+  const item = params ? params.item : undefined;
+  const {fetchCreateTodo, fetchUpdateTodo} = React.useContext(TodoContext);
   const navigation = useNavigation();
-  const [title, setTitle] = React.useState('');
-  const [text, setText] = React.useState('');
+  const [title, setTitle] = React.useState(item ? item.title : '');
+  const [text, setText] = React.useState(item ? item.text : '');
+  const currentFetch = params ? fetchUpdateTodo : fetchCreateTodo;
 
   const handleAddTask = React.useCallback(() => {
     if (text.trim().length || title.trim().length) {
-      fetchCreateTodo({title, text, category: selectCategory});
+      currentFetch({
+        id: item ? item.id : null,
+        title,
+        text,
+        category: selectCategory,
+      });
       setText('');
       setSelectCategory(2);
       navigation.navigate('Home');
@@ -27,8 +35,9 @@ const CreateTask = ({selectCategory, setSelectCategory}) => {
   }, [
     text,
     title,
+    item,
     navigation,
-    fetchCreateTodo,
+    currentFetch,
     selectCategory,
     setSelectCategory,
   ]);
@@ -38,6 +47,10 @@ const CreateTask = ({selectCategory, setSelectCategory}) => {
       header: () => <CreateTodoHeader {...{handleAddTask}} />,
     });
   }, [navigation, handleAddTask]);
+
+  React.useEffect(() => {
+    params && setSelectCategory(params.item.category);
+  }, [params, setSelectCategory]);
 
   return (
     <View style={styles.container}>
@@ -55,7 +68,7 @@ const CreateTask = ({selectCategory, setSelectCategory}) => {
         onChangeText={setText}
         placeholder="Add task"
         multiline
-        autoFocus
+        autoFocus={item ? false : true}
         inputContainerStyle={{borderBottomWidth: 0}}
         leftIcon={
           <FontAwesome name="tasks" size={24} color={THEME.MAIN_COLOR} />

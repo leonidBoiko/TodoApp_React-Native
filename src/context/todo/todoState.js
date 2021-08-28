@@ -10,7 +10,16 @@ export const TodoState = ({children}) => {
   const fetchCreateTodo = async props => {
     try {
       const id = await DB.createTodo(props);
-      addTodo({id, ...props});
+      addTodo({...props, id});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchUpdateTodo = async props => {
+    try {
+      await DB.updateTodo(props);
+      updateTodo(props);
     } catch (error) {
       console.log(error);
     }
@@ -37,9 +46,7 @@ export const TodoState = ({children}) => {
   const addTodo = props => dispatch({type: ADD_TODO, ...props});
   const getTodoList = data => dispatch({type: GET_TODO_LIST, data});
   const removeTodo = id => dispatch({type: REMOVE_TODO, id});
-  const updateTodo = (id, title, text, category) => {
-    dispatch({type: UPDATE_TODO, id, title, text, category});
-  };
+  const updateTodo = props => dispatch({type: UPDATE_TODO, ...props});
 
   return (
     <TodoContext.Provider
@@ -47,7 +54,7 @@ export const TodoState = ({children}) => {
         todos: state.todos,
         fetchCreateTodo,
         fetchRemoveTodo,
-        updateTodo,
+        fetchUpdateTodo,
         fetchTodoList,
       }}>
       {children}

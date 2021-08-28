@@ -103,7 +103,7 @@ export class DB {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          'UPDATE todo SET title = ? text = ? category = ? WHERE id = ?',
+          'UPDATE todo SET title=?, text=?, category=? WHERE id=?',
           [title, text, category, id],
           resolve,
           (_, error) => reject(error),
