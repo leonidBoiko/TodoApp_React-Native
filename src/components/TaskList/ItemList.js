@@ -5,11 +5,9 @@ import styles from './styles';
 const ItemList = ({item}) => {
   return (
     <View style={styles.itemContainer}>
-      {item.title && (
-        <Text numberOfLines={1} style={[styles.itemText, styles.itemTitle]}>
-          {item.title}
-        </Text>
-      )}
+      <Text numberOfLines={1} style={[styles.itemText, styles.itemTitle]}>
+        {item.title}
+      </Text>
       <Text style={styles.itemText} numberOfLines={2}>
         {item.text}
       </Text>
